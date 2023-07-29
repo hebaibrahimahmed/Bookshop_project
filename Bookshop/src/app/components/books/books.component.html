@@ -1,0 +1,52 @@
+<p *ngIf="!books" class="alert alert-secondary text-center my-3 animate__animated animate__fadeIn">
+  You have no books in your shelf.
+</p>
+
+<div class="container">
+
+  <h1 class="animate__animated animate__fadeIn">Books</h1>
+  <div class="row">
+    <div class="col-12 justify-content-center align-items-center d-flex my-5 animate__animated animate__fadeIn">
+      <input type="text" class="form-control mb-3 w-50 animate__animated animate__fadeIn" placeholder="Search Books..."
+        [(ngModel)]="searchTerm">
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center"
+      *ngFor="let book of books| Book_Filter:searchTerm |slice:(currentPage-1)*pageSize:currentPage*pageSize">
+      <a routerLink="/book-details/{{ book._id }}" class="animate__animated animate__fadeIn">
+        <img class="animate__animated animate__zoomIn book-image" [src]="book.image_url" alt="{{ book.name }}" />
+      </a>
+      <a routerLink="/book-details/{{ book._id }}" style="text-decoration: none;color:#000"
+        class="animate__animated animate__fadeIn">
+        <h4 class="animate__animated animate__fadeIn">{{ book?.name }}</h4>
+      </a>
+      <p class="animate__animated animate__fadeIn"><strong>By, </strong><a routerLink="/author/{{book?.author_id?._id}}"
+          style="text-decoration: none;color:#000" class="animate__animated animate__fadeIn">{{
+          book?.author_id?.first_name + " "+ book?.author_id?.last_name }}</a></p>
+    </div>
+
+  </div>
+  <nav aria-label="Categories Pagination" style="display: flex;justify-content:center;align-items:center;"
+    class="animate__animated animate__fadeIn">
+    <ul class="pagination d-flex justify-content-center w-50">
+      <li class="page-item" [class.disabled]="currentPage == 1" class="animate__animated animate__fadeIn">
+        <a class="page-link" (click)="prevPage()" aria-label="Previous" class="animate__animated animate__fadeIn">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage==page"
+        class="animate__animated animate__fadeIn">
+        <a class="page-link " (click)="setPage(page)" class="animate__animated animate__fadeIn">{{page}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage == totalPages" class="animate__animated animate__fadeIn">
+        <a class="page-link" (click)="nextPage()" aria-label="Next" class="animate__animated animate__fadeIn">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<app-scrolltop class="custom-scroll animate__animated animate__fadeIn"></app-scrolltop>
+
+<app-footer class="animate__animated "></app-footer>

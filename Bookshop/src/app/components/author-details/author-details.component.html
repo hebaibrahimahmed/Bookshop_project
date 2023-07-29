@@ -1,0 +1,42 @@
+<p-toast></p-toast>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <img class="card-img-top author-image" src="{{author?.author?.image_url}}" alt="Author Image">
+        <div class="card-body">
+          <h2 class="card-title author-name">{{author?.author?.first_name}} {{author?.author?.last_name}}</h2>
+          <h5 class="card-subtitle author-dob">{{author?.author?.date_of_birth | date : "dd MMMM yyyy"}}</h5>
+          <p class="card-text author-info">{{author?.author?.author_info}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title fw-bold mb-4 text-center">Author's Books</h3>
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col" *ngFor="let book of author.books">
+              <div class="card h-100 book-card">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold text-center book-title">{{book?.name}}</h5>
+                  <img class="book-image" [src]="book?.image_url" alt="{{ book?.name }}" />
+                  <div class="d-flex align-items-center justify-content-center book-rating">
+                    <p-rating class="" [readonly]=true [cancel]=false [ngModel]="book?.averageRate"></p-rating>
+                    <span class="mx-2 mb-1">({{ book?.totalRates }})</span>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <a routerLink="/book-details/{{book._id}}" class="btn btn-primary my-3">View Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

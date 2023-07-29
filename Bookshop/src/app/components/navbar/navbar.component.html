@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" [hidden]="isAdmin">
+  <div class="container-fluid nav-try">
+    <a class="navbar-brand" routerLink="/">
+      <img src="../../../assets/logo5.jpg" id="logo" alt="BookCrate Logo" class="d-inline-block align-text-top" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-arrow"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/books">Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/categories">Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/authors">Authors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/aboutus">About us</a>
+        </li>
+      </ul>
+      <div class="btn-group" *ngIf="islogged">
+        <a id="profile-btn" type="button" class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static"
+          aria-expanded="false">
+          <img src="{{ user?.image_url }}" alt="{{ user?.first_name }}" />
+          {{ user?.first_name | titlecase}} {{user?.last_name | titlecase }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+          <a routerLink="/profile/{{ user?.user_id }}">
+            <li class="dropdown-item">
+              Profile
+            </li>
+          </a>
+          <a (click)="logout()" routerLink="/aboutus">
+            <li class="dropdown-item">
+              Logout
+            </li>
+          </a>
+        </ul>
+      </div>
+      <div>
+        <div class="login" *ngIf="!islogged">
+          <ul class="d-flex jsutify-content-center align-items-center">
+            <li>
+              <a class="nav-link" routerLink="/register">Register</a>
+            </li>
+            <li>
+              <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" [hidden]="!isAdmin">
+  <div class="container-fluid nav-try d-flex justify-content-end align-items-end">
+    <div class="btn-group" *ngIf="islogged">
+      <a id="profile-btn" type="button" class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static"
+        aria-expanded="false">
+        
+        <img src="{{ user?.image_url }}" alt="{{ user?.first_name }}" />
+        {{ user?.first_name | titlecase}} {{user?.last_name | titlecase }}
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+        <a (click)="logout()" routerLink="/aboutus">
+          <li class="dropdown-item">
+            Logout
+          </li>
+        </a>
+      </ul>
+    </div>
+    <div>
+      <div class="login" *ngIf="!islogged">
+        <ul class="d-flex jsutify-content-center align-items-center">
+          <li>
+            <a class="nav-link" routerLink="/register">Register</a>
+          </li>
+          <li>
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</nav>

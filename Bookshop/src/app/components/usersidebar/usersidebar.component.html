@@ -1,0 +1,110 @@
+<!-- <div id="wrapper" class="sidebar bg-secondary">
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav d-flex flex-column">
+      <li class="sidebar-brand">
+        <a
+          class="nav-item"
+          routerLink="/profile/{{ user.user_id }}"
+          [queryParams]="{ filter: 'all' }"
+        >
+          All
+        </a>
+      </li>
+      <li>
+        <a
+          class="nav-item"
+          routerLink="/profile/{{ user.user_id }}"
+          [queryParams]="{ filter: 'new' }"
+          >New</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-item"
+          routerLink="/profile/{{ user.user_id }}"
+          [queryParams]="{ filter: 'currently_reading' }"
+          >Currently reading</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-item"
+          routerLink="/profile/{{ user.user_id }}"
+          [queryParams]="{ filter: 'want_to_read' }"
+          >Want to read</a
+        >
+      </li>
+      <li>
+        <a
+          class="nav-item"
+          routerLink="/profile/{{ user.user_id }}"
+          [queryParams]="{ filter: 'read' }"
+          >Finished</a
+        >
+      </li>
+    </ul>
+  </div>
+</div> -->
+<!-- 
+<button class="navbar-burger" (click)="toggleMenu()">
+  <i class="fa-solid fa-bars" style="color: #404040"></i>
+</button>
+
+<div class="menu" *ngIf="open">
+  <nav>
+    <a
+      routerLink="/profile/{{ user.user_id }}"
+      [queryParams]="{ filter: 'all' }"
+      style="animation-delay: 0.2s"
+      >All</a
+    >
+    <a
+      class="nav-item"
+      routerLink="/profile/{{ user.user_id }}"
+      [queryParams]="{ filter: 'new' }"
+      style="animation-delay: 0.3s"
+      >New</a
+    >
+    <a
+      routerLink="/profile/{{ user.user_id }}"
+      [queryParams]="{ filter: 'read' }"
+      style="animation-delay: 0.4s"
+      >Finished</a
+    >
+    <a
+      routerLink="/profile/{{ user.user_id }}"
+      [queryParams]="{ filter: 'currently_reading' }"
+      style="animation-delay: 0.4s"
+      >Currently Reading</a
+    >
+    <a
+      routerLink="/profile/{{ user.user_id }}"
+      [queryParams]="{ filter: 'want_to_read' }"
+      style="animation-delay: 0.4s"
+      >Want to read</a
+    >
+  </nav>
+</div> -->
+
+
+<div class="bar">
+  <div class="sidebar-btn">
+    <span class="fas fa-bars"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="text">Status Filteration</div>
+    <ul>
+      <li><a routerLink="/profile/{{ user.user_id }}" routerLinkActive="active" style="animation-delay: 0.2s">All</a>
+      </li>
+      <li><a class="nav-item" routerLink="/profile/{{ user.user_id }}" [queryParams]="{ filter: 'new' }"
+          style="animation-delay: 0.3s" routerLinkActive="active">New</a></li>
+      <li><a routerLink="/profile/{{ user.user_id }}" [queryParams]="{ filter: 'read' }" style="animation-delay: 0.4s"
+          routerLinkActive="active">Finished</a></li>
+      <li><a routerLink="/profile/{{ user.user_id }}" [queryParams]="{ filter: 'currently_reading' }"
+          style="animation-delay: 0.4s" routerLinkActive="active">Currently Reading</a></li>
+      <li><a routerLink="/profile/{{ user.user_id }}" [queryParams]="{ filter: 'want_to_read' }"
+          style="animation-delay: 0.4s" routerLinkActive="active">Want to read</a></li>
+    </ul>
+  </aside>
+</div>

@@ -1,0 +1,158 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Start Cover */
+.cover-image {
+  background-image: url("../../../assets/cover.jpg");
+  position: relative;
+  height: 500px;
+}
+
+.about-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.about-text h1 {
+  font-size: 2.3rem;
+  font-weight: bold;
+}
+
+.about-text p {
+  font-size: 1.5rem;
+}
+
+.inline-text {
+  font-style: italic;
+}
+
+.about-color {
+  color: #e59285;
+}
+
+.home-color {
+  color: wheat;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* End Cover */
+
+/* Start Section Two */
+.skill-div {
+  margin-top: 2%;
+}
+
+.skill-text {
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+.skill-text-two {
+  color: #333333;
+  font-size: 1rem;
+}
+
+.progress-text {
+  font-weight: 600;
+}
+
+.progress-container {
+  /* margin: 0 5% 0 5%; */
+}
+
+.left-para {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.right-para,
+.right-title {
+  font-weight: 700;
+}
+
+.address-title {
+  font-weight: bold;
+}
+
+/* Start animated progress */
+.animated-progress {
+  width: 90%;
+  height: 9px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f6f6f6;
+  overflow: hidden;
+  margin-bottom: 10%;
+}
+
+.animated-progress span {
+  height: 100%;
+  width: 0;
+  display: block;
+}
+
+.progress-bar span {
+  background-color: rgb(123, 123, 123);
+}
+
+.progress-percent-one {
+  position: relative;
+  left: 17%;
+}
+
+.progress-percent-two {
+  position: relative;
+  left: 24%;
+}
+
+.progress-percent-three {
+  position: relative;
+  left: 24%;
+}
+
+.progress-percent-four {
+  position: relative;
+  left: 33%;
+}
+/* End animated progress */
+
+/* End Section Two */
+
+/* Start Section Threee */
+.photo-container {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.icon-container a {
+  margin: 0 10px;
+}
+
+.icon-container a i {
+  font-size: 30px;
+  color: #333;
+}
+
+.icon-container a i:hover {
+  font-size: 30px;
+  color: #e59285;
+}
+/* End Section Three */
+
+/* Start Footer */
+footer {
+  background-color: #f2f2f2;
+  /* padding: 10px; */
+}
+.progress-bar {
+  height: 0.5rem;
+  background-color: rgb(123, 123, 123);
+  border-radius: 10px;
+}
+/* End Footer */

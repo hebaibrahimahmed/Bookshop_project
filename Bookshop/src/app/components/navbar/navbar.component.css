@@ -1,0 +1,47 @@
+.user-profile a {
+  cursor: pointer;
+  text-decoration: none;
+  padding: 7px;
+  color: #333;
+}
+.login ul li{
+list-style-type: none;
+padding: 10px;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+#logo {
+  width: 120px;
+  height: 75px;
+}
+
+.user-profile {
+  background-color: #17a2b8;
+  outline: none;
+  border-radius: 10px;
+}
+
+.dropdown-menu{
+  width:10px !important;
+  max-width:30px !important;
+}
+
+.dropdown-menu li{
+ min-width:10px !important;
+}
+.profile-btn{
+
+}
+#profile-btn{
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+.btn-group .dropdown-menu a{
+    text-decoration: none;
+  color: black;
+}

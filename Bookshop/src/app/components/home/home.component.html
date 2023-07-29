@@ -1,0 +1,147 @@
+<div class="container-fluid my-2">
+  <div class="slider-wrapper">
+
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li *ngFor="let image of images; let i = index" [class.active]="i === currentImageIndex"
+          (click)="currentImageIndex = i"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === currentImageIndex">
+          <img class="d-block w-100 img-fluid " [src]="image" alt="Slide {{i+1}} ">
+          <div class="carousel-caption ">
+
+            <h1> Read <span> Your</span> <br> Favorite <span>
+                Book</span> <br> From <span> Here</span>
+            </h1>
+
+          </div>
+        </div>
+        <a class="carousel-control-prev" (click)="previousImage()" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" (click)="nextImage()" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ////////////// -->
+
+
+<div class="container-fluid my-5 w-75">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="text-black">NEW <span class="text-danger">BOOKS</span></h1>
+      <p class="mb-4">Check out our latest selection of must-read books!</p>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-top">
+    <div class="col-12 col-md-6 col-lg-3 d-flex flex-column justify-content-top align-items-center"
+      *ngFor="let book of books">
+      <div class="card mb-4 mx-2 my-2 custom-card">
+        <a routerLink="/book-details/{{ book._id }}"> <img [src]="book.image_url" alt="{{ book.name }}"
+            class="card-img-top img-fluid" style="border-radius: 10px;width:200px; height:40vh;"></a>
+        <div class="card-body">
+          <h4 class="card-title text-center">{{ book?.name }}</h4>
+          <p class="card-text text-center">{{ book?.author_id?.first_name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid position-relative">
+  <img src="../../../assets/section2.jpg" alt="" style="width:100%;">
+  <div class="text-block">
+    <h1 class="text-black">STAY WITH US</h1>
+    <p>Register to our BookShop now and stay up-to-date with new books and<br> the latest lookbooks and exclusive offers
+    </p>
+    <br>
+    <button style="height: 50px; width: 120px;   padding: 5px;" routerLink="/register" type="submit"
+      class="btn btn-dark tn-lg outline-dark">Register Now</button>
+  </div>
+
+
+
+
+  <div class="container-fluid">
+
+    <div class="row text-center my-5">
+      <div class="col-12">
+        <h2>Popular <span class="text-danger"> Books</span></h2>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-12 col-md-4 text-center" *ngFor="let book of popularBooks">
+        <div>
+          <a routerLink="/book-details/{{ book._id }}"> <img style="border-radius: 10px;width:200px; height:40vh;"
+              [src]="book.image_url" alt="{{ book.name }}" /></a>
+          <a routerLink="/book-details/{{ book._id }}" style="color: black; text-decoration:none;">
+            <h4>{{ book?.name }}</h4>
+          </a>
+          <p><strong>By, </strong> <a routerLink="/author/{{ book?.author_id?._id}}"
+              style="color: black;text-decoration:none;">{{ book?.author_id?.first_name + " "+
+              book?.author_id?.last_name }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container-fluid mt-5 py-5 bg-light">
+    <div class="row">
+      <div class="col-12 text-center d-flex justify-content-center align-items-center">
+        <div>
+          <h1 class="text-black text-center">ABOUT <span class="text-danger">BOOKCRATE</span></h1>
+          <p class="mb-4">BookCrate is a platform for book lovers to discover and purchase their favorite books online.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-3 text-center my-2 mx-2 bg-light">
+        <div class="blogs p-4">
+          <h5>International Activities Of The Book In</h5>
+          <p>Dummy text dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna</p>
+          <hr>
+          <span>27 Jun, 2018</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 text-center my-2 mx-2 bg-light">
+        <div class="blogs p-4">
+          <h5>Reading Has Signficant Info In Boighor</h5>
+          <p>Dummy text dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna</p>
+          <hr>
+          <span>27 Jun, 2018</span>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 text-center my-2 mx-2 bg-light">
+        <div class="blogs p-4">
+          <h5>The London Book Fair Is To Long Same</h5>
+          <p>Dummy text dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna</p>
+          <hr>
+          <span>27 Jun, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ///////////////footer////// -->
+  <app-footer></app-footer>
+  <app-scrolltop class="custom-scroll"></app-scrolltop>

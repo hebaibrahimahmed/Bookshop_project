@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p *ngIf="!books" class="alert alert-secondary text-center my-3">
+        This category doesn't have no books.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-4 text-center" *ngFor="let book of books">
+      <a routerLink="/book-details/{{ book._id }}"> <img class="w-75" [src]="book.image_url"
+          alt="{{ book.name }}" /></a>
+      <a style="text-decoration: none" routerLink="/book-details/{{ book._id }}">
+        <h2 class="text-center" style=" color:#000;">{{ book.name }}</h2>
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

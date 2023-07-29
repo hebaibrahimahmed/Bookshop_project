@@ -1,0 +1,49 @@
+<div class="empty-state-container" *ngIf="books?.length === 0">
+  <div class="empty-state-row">
+    <div class="empty-state-col">
+      <p class="empty-state-text">No Books Yet</p>
+    </div>
+  </div>
+  <div class="empty-state-row">
+    <div class="empty-state-col">
+      <img class="empty-state-image" src="../../../assets/404.png" alt="notfound" />
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-usersidebar [user]="user"></app-usersidebar>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 col-lg-4 mb-4" *ngFor="let book of books" [@bookAnimation]>
+      <div class="content ">
+        <div class="book-image-container">
+          <a routerLink="/book-details/{{book?.book_id?._id}}">
+            <img class="book-image" [src]="book?.book_id?.image_url" alt="{{ book?.book_id?.name }}" />
+          </a>
+        </div>
+
+        <h4 class="book-title">{{ book?.book_id?.name | titlecase }}</h4>
+        <h5 class="book-author">By, {{ book?.book_id?.author_id?.first_name | titlecase }}</h5>
+        <div class="ratings-container">
+          <p-rating [(ngModel)]="book.rate" (onCancel)="removeRate(book.book_id)"
+            (onRate)="onRatingChanged(book?.book_id,$event)"></p-rating>
+          <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="book.average_rate"></p-rating>
+        </div>
+        <mat-form-field>
+          <mat-label>{{ book.book_status }}</mat-label>
+          <mat-select class="selected" (selectionChange)="onStateChanged(book?.book_id,$event)">
+            <mat-option class="select" *ngFor="let status of status" [value]="status?.value">
+              <b> {{status?.viewValue}} </b>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,157 @@
+<p-toast></p-toast>
+
+<div class="card my-5">
+    <!-- <p-toolbar styleClass="mb-4 gap-2"> -->
+        <!-- <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="openNew()"></button>
+        </ng-template> -->
+    <!-- </p-toolbar> -->
+
+    <p-table #dt [value]="users" [rows]="10" [paginator]="true" [tableStyle]="{'min-width': '75rem'}"
+        [(selection)]="selectedUsers" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Users</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="first_name" style="min-width:1rem">First Name <p-sortIcon field="first_name"></p-sortIcon></th>
+                <th pSortableColumn="last_name" style="min-width:1rem">last Name <p-sortIcon field="last_name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="gender">Gender <p-sortIcon field="gender"></p-sortIcon></th>
+                <th pSortableColumn="date_birth">Birth Date <p-sortIcon field="date_birth"></p-sortIcon></th>
+                <th>Image</th>
+                <th pSortableColumn="email">E-mail <p-sortIcon field="email"></p-sortIcon></th>
+                <!-- <th pSortableColumn="password">Password<p-sortIcon field="password"></p-sortIcon></th> -->
+                <th pSortableColumn="address">Address <p-sortIcon field="address"></p-sortIcon></th>
+                <th pSortableColumn="is_admin">Admin <p-sortIcon field="is_admin"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.birth_date | date}}</td>
+                <td><img [src]="user.image_url" [alt]="user.first_name" width="80" height="60"
+                        style="border-radius: 10px;" class="shadow-4" /></td>
+                <td>{{user.email}}</td>
+                <!-- <td>{{user.password}}</td> -->
+                <td>{{user.address}}</td>
+                <td>{{user.is_admin?"YES":"NO"}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="editUser(user)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteUser(user)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{users ? users.length : 0 }} users.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="User Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="registerForm" (ngSubmit)="registerForm">
+
+            <img [src]="user.image_url" [alt]="user.image_url" class="product-image" *ngIf="user.image_url">
+
+            <div class="field mt-2">
+                <label for="name">First Name</label>
+                <input type="text" pInputText id="first_name" formControlName="first_name" name="first_name"
+                    [(ngModel)]="user.first_name" required autofocus />
+                <small class="p-error" *ngIf="submitted && !user.first_name">first name is required.</small>
+            </div>
+            <div class="field mt-2">
+                <label for="name">Last Name</label>
+                <input type="text" pInputText id="last_name" formControlName="last_name" name="last_name"
+                    [(ngModel)]="user.last_name" required autofocus />
+                <small class="p-error" *ngIf="submitted && !user.last_name">last name is required.</small>
+            </div>
+            <div class="field mt-2">
+                <label class="mb-3">Gender</label>
+                <div class="formgrid grid">
+                    <div class="field-radiobutton col-6 d-flex justify-content-between">
+                        <p-radioButton id="male" name="gender" formControlName="gender" value="male"
+                            [(ngModel)]="user.gender"></p-radioButton>
+                        <label for="male">Male</label>
+                        <p-radioButton id="femlae" name="gender" formControlName="gender" value="female"
+                            [(ngModel)]="user.gender"></p-radioButton>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="field mt-2">
+                <label class="mb-3">Birth Date</label>
+                <input type="date" pInputText formControlName="birth_date" id="birth_date" name="birth_date"
+                    [(ngModel)]="user.birth_date" required autofocus />
+            </div>
+            <div class="mt-2">
+                <p-toolbar>
+                    <ng-template pTemplate="right">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <img [src]="user.image_url" [alt]="user.image_url" class="product-image"
+                                *ngIf="user.image_url" style="width:100px">
+                            <input id="image_url" type="file" (change)="onFileSelected($event)"
+                                formControlName="image_url" class="form-control bg-light text-dark" />
+                        </div>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="field mt-2">
+                <label for="name">E-mail</label>
+                <input type="text" pInputText formControlName="email" id="email" name="email" [(ngModel)]="user.email"
+                    required autofocus />
+                <small class="p-error" *ngIf="submitted && !user.email">email is required.</small>
+            </div>
+            <!-- <div class="field mt-2">
+                <label for="name">Password</label>
+                <input type="password" pInputText formControlName="password" id="password" name="password"
+                    [(ngModel)]="user.password" required autofocus />
+                <small class="p-error" *ngIf="submitted && !user.password">password is required.</small>
+            </div> -->
+            <!-- <div class="field mt-2">
+                <label for="name">Password</label>
+                <div class="d-flex">
+                    <input [type]="passwd" pInputText formControlName="password" id="password" name="password"
+                        [(ngModel)]="user.password" required autofocus />
+                    <a class="btn btn-outline-secondary" (click)="onClick()">
+                        <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                        <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                    </a>
+                </div>
+                <small class="p-error" *ngIf="submitted && !user.password">password is required.</small>
+            </div> -->
+
+
+            <div class="field mt-2">
+                <label for="name">Address</label>
+                <input type="text" pInputText formControlName="address" id="address" name="address"
+                    [(ngModel)]="user.address" required autofocus />
+            </div>
+            <div class="field mt-3">
+                <div class="d-flex align-items-center">
+                    <label for="is_admin" class="mx-2 mb-1">Admin</label>
+                    <input type="checkbox" pRipple formControlName="is_admin" id="is_admin" name="is_admin"
+                        [(ngModel)]="user.is_admin" required autofocus />
+                </div>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

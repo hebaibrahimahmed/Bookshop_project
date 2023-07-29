@@ -1,0 +1,181 @@
+<p-toast></p-toast>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p *ngIf="!book" [ngClass]="{'alert': true, 'alert-secondary': true, 'text-center': true, 'my-3': true}">
+        Unfortunately, No details for this book.
+      </p>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-12">
+      <p *ngIf="!isLogged && added; haveTheBook" class="alert alert-warning text-center my-2">
+        {{ error | titlecase }}
+      </p>
+    </div>
+  </div> -->
+  <!-- <div class="row">
+    <div class="col-12">
+      <div class="alert alert-warning text-center my-2 d-flex align-items-center justify-content-between"
+        *ngIf="haveTheBook">
+        <p>
+          {{ error | titlecase }}
+        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 col-5 text-center">
+      <img class="book-image w-100" [src]="book?.book?.image_url" alt="{{ book?.book?.name }}" />
+      <div class="d-flex align-items-center justify-content-center">
+        <p-rating class="" [readonly]="user.email == ''" [(ngModel)]="rating"
+          (ngModelChange)="onRatingChanged($event)"></p-rating>
+        <span class="mx-2 mb-1">({{ book?.totalRates }})</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div>
+        <div class="middle">
+          <h1>{{ book?.book?.name }}</h1>
+          <div class="my-3">
+            <a routerLink="/author/{{book?.book?.author_id._id}}" class="text-center">
+              <img style="border-radius: 50%;width:50px;height:50px;" class="mx-2"
+                src="{{ book?.book?.author_id?.image_url }}" alt="{{ book?.book?.author_id?.first_name }}" /></a>
+            <a style="text-decoration: none;" routerLink="/author/{{book?.book?.author_id._id}}">
+              <h6>
+                {{
+                book?.book?.author_id?.first_name +
+                " " +
+                book?.book?.author_id?.last_name
+                }}
+              </h6>
+            </a>
+          </div>
+          <div class="book-rate mt-3">
+            <p-rating [(ngModel)]="book?.avg_rate.avg_val" [readonly]="true" [cancel]="false"></p-rating>
+          </div>
+          <div class="book-desc mt-2">
+            <p>{{ book?.book?.book_description }}</p>
+          </div>
+          <div class="author_info  d-flex align-items-center">
+            <div>
+              <p style="font-weight: bold">PUBLISHER</p>
+              <p style="font-weight: bold">FIRST PUBLISH</p>
+              <p style="font-weight: bold">ISBN</p>
+              <p style="font-weight: bold">LANGUAGE</p>
+              <p style="font-weight: bold">PAGES</p>
+            </div>
+            <div class="mx-4">
+              <p>Thomas Nilson Inc.</p>
+              <p>Dec 30 2016</p>
+              <p>05561368712 12364126862</p>
+              <p>English</p>
+              <p>240p .</p>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-start">
+          <div class="col-md-5 py-1 my-2 text-center">
+            <a class="btn btn-outline-primary" (click)="addReview()">Add to read</a>
+          </div>
+          <div class="col-md-5 my-2">
+            <select #status (change)="changeStatus(status.value)" class="form-select selectpicker" id="status"
+              data-style="btn-primary" data-width="fit" data-show-icon="true" [disabled]="!isLogged">
+              <option value="new" default data-icon="bi-bookmark-check">
+                New
+              </option>
+              <option value="want_to_read" data-icon="bi-bookmark-check">
+                Want to read
+              </option>
+              <option value="currently_reading" data-icon="bi-bookmark-plus">
+                Currently reading
+              </option>
+              <option value="read" data-icon="bi-bookmark-fill">Read</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-12 text-center">
+      <button class="btn btn-outline-secondary" (click)="showDialog()">Add review</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p-dialog [(visible)]="visible">
+        <div class="d-flex flex-column">
+          <form>
+            <h3 class="text-center">Make review</h3>
+            <textarea #textarea name="" id="" cols="100" rows="7"
+              style="  padding: 12px 20px;border-radius:10px;"></textarea> <br>
+            <button class="btn btn-outline-success my-2" type="submit" [disabled]="!isLogged && added"
+              (click)="changeReview(textarea)" (visible)="!visible">Add review</button>
+          </form>
+        </div>
+      </p-dialog>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12 " *ngFor=" let review of reviews">
+      <div class="reviews">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center justify-content-start user_info"
+            style="border-radius: 10px; margin-bottom: 20px">
+            <div class="d-flex align-items-center justify-content-center">
+              <img class="userImg mx-3" src="{{ review?.user_id?.image_url }}"
+                alt="{{ review?.user_id?.first_name }}" />
+              <div class="d-flex flex-column user_name">
+                <strong>
+                  {{
+                  review?.user_id?.first_name + " " + review?.user_id?.last_name
+                  | titlecase
+                  }}
+                </strong>
+                <small class="text-muted mx-3 review_date" style="font-size: small;">1 day ago.</small>
+              </div>
+            </div>
+          </div>
+          <div class="edit_delete d-flex align-items-center">
+            <a class="btn btn-warning mx-2" [hidden]="user.user_id !== review.user_id._id"
+              (click)="onUpdateReviewText(review._id)"><mat-icon class="py-1">edit note</mat-icon></a>
+            <a class="btn btn-danger" (click)="onDeleteReviewText(review._id)"
+              [hidden]="user.user_id !== review.user_id._id"><mat-icon class="py-1">delete</mat-icon></a>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <p-dialog [(visible)]="showReviewForUpdate">
+                <div class="d-flex flex-column">
+                  <form>
+                    <h3 class="text-center">Make review</h3>
+                    <textarea #ta name="updatereview" id="updatereview" cols="100" rows="7"
+                      style="padding: 12px 20px;border-radius:10px;"></textarea>
+                    <br>
+                    <button class="btn btn-outline-success my-2" type="submit" [disabled]="!isLogged && added"
+                      (click)="updateReview(ta)" (visible)="!showReviewForUpdate">Update review</button>
+                  </form>
+                </div>
+              </p-dialog>
+            </div>
+          </div>
+        </div>
+        <div class="review px-2">
+          <p>{{ review?.review | titlecase }}</p>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<app-footer></app-footer>

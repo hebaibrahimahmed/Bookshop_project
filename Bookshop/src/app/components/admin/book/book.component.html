@@ -1,0 +1,119 @@
+<p-toast></p-toast>
+
+<div class="card my-5">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="books" [rows]="10" [paginator]="true" [tableStyle]="{'min-width': '75rem'}"
+        [(selection)]="selectedBooks" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Books</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" style="min-width:1rem">Name <p-sortIcon field="first_name"></p-sortIcon></th>
+                <th pSortableColumn="image_url" style="min-width:1rem">Image</th>
+                <th pSortableColumn="image_url" style="min-width:1rem">Price</th>
+                <th pSortableColumn="category" style="min-width:1rem">Category</th>
+                <th pSortableColumn="author" style="min-width:1rem">Author</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-book>
+            <tr>
+                <td>{{book.name}}</td>
+                <td><img [src]="book.image_url" [alt]="book.name" width="80" height="60" style="border-radius: 10px;"
+                        class="shadow-4" /></td>
+                <td>{{book.price | currency}}</td>
+                <td>
+                    {{book.category_id.name}}
+                </td>
+                <td>
+                    {{book.author_id.first_name + " " + book.author_id.last_name}}
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="editBook(book)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteBook(book)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{books ? books.length : 0 }} books.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="bookDialog" [style]="{width: '450px'}" header="Book Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="registerForm" (ngSubmit)="registerForm">
+            <div class="text-center">
+                <img [src]="book.image_url" [alt]="book.image_url" class="product-image text-center w-25"
+                    *ngIf="book.image_url">
+            </div>
+            <div class="field mt-2">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="name" formControlName="name" name="name" [(ngModel)]="book.name"
+                    required autofocus />
+                <small class="p-error" *ngIf="submitted && !book.name">Name is required.</small>
+            </div>
+            <div class="field mt-2">
+                <p-toolbar>
+                    <ng-template pTemplate="right">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <img [src]="book.image_url" [alt]="book.image_url" class="product-image"
+                                *ngIf="book.image_url" style="width:100px">
+                            <input id="image_url" type="file" (change)="onFileSelected($event)"
+                                formControlName="image_url" class="form-control bg-light text-dark" />
+                        </div>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="field mt-2">
+                <label for="name">Category</label>
+                <select class="form-select" formControlName="category_id" [(ngModel)]="selectedCategory" name="category_id" id="category"
+                    (change)="selectCategory($event)" required>
+                    <option value="" disabled selected="selected">Select Category</option>
+                    <option value="{{cat._id}}" *ngFor="let cat of categories">{{cat.name}}</option>
+                </select>
+                <small class="p-error" *ngIf="submitted && !book.category_id.name">Category is required.</small>
+            </div>
+            <div class="field mt-2">
+                <label for="author">Author</label>
+                <select class="form-select" formControlName="author_id" [(ngModel)]="selectedAuthor" (change)="selectAuthor($event)" name="author_id"
+                    id="author">
+                    <option value="" disabled selected="selected">Select Author</option>
+
+                    <option value="{{author._id}}" *ngFor="let author of authors">
+                        {{author.first_name + " " +
+                        author.last_name}}
+                    </option>
+                </select>
+                <small class="p-error" *ngIf="submitted && !book.author_id.first_name">Author is required.</small>
+            </div>
+            <div class="field mt-2">
+                <label for="price">Price</label>
+                <input type="number" pInputText id="price" formControlName="price" name="price" class="book-price"
+                    min="0" value="10" [(ngModel)]="book.price" required autofocus />
+                <small class="p-error" *ngIf="submitted && !book.price">Price is required.</small>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveBook()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

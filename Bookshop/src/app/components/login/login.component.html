@@ -1,0 +1,88 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="error" class="alert alert-danger text-center">
+        {{ error }}
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>
+  <div class="container py-1">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-5 col-md-8 col-sm-10">
+        <div class="card">
+          <div class="card-header">
+            <h4>Sign in</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+              <div class="form-group mb-3">
+                <label for="email" class="control-label my-2 text-dark">Email</label>
+                <input id="email" type="email" formControlName="email" class="form-control bg-light text-dark"
+                  required />
+                <div class="error" *ngIf="
+                    loginForm.controls['email'].invalid &&
+                    (loginForm.controls['email'].dirty ||
+                      loginForm.controls['email'].touched)
+                  ">
+                  <p *ngIf="loginForm.get('email')?.errors?.['required']" class="text-danger">
+                    Email address is required.
+                  </p>
+                  <p *ngIf="loginForm.get('email')?.errors?.['email']" class="text-danger">
+                    Invalid email address.
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="password" class="control-label my-2 text-dark">Password</label>
+                <div class="d-flex">
+                  <input id="password" [type]="passwd" formControlName="password"
+                    class="form-control bg-light text-dark" required />
+                  <button class="btn btn-outline-secondary" (click)="onClick()">
+                    <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                    <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                  </button>
+                </div>
+                <div class="error" *ngIf="
+                    loginForm.controls['password']?.invalid &&
+                    (loginForm.controls['password'].dirty ||
+                      loginForm.controls['password'].touched)
+                  ">
+                  <p *ngIf="loginForm.controls['password'].errors!['required']" class="text-danger">
+                    Password is required.
+                  </p>
+                  <p *ngIf="(loginForm.get('password')?.errors)!['minlength']" class="text-danger">
+                    Password must be at least 8 characters.
+                  </p>
+                </div>
+              </div>
+              <div class="form-group w-50 w-100">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" [disabled]="loginForm.invalid" class="btn btn-dark btn-lg btn-block">
+                    Login
+                  </button>
+                  <div class="my-3">
+                    <p class="mb-0">
+                      Don't have an account?
+                      <a routerLink="/register" class="text-dark-50 fw-bold">Sign Up</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+<app-footer></app-footer>

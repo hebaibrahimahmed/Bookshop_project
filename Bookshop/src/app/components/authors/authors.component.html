@@ -1,0 +1,45 @@
+<div class="container mt-0">
+  <h1 class="text-center my-4 mt-0">Authors</h1>
+  <div class="row">
+
+    <div class="col-12 justify-content-center align-items-center d-flex my-5 animate__animated animate__fadeIn">
+      <input type="text" class="form-control mb-3 w-50 animate__animated animate__fadeIn"
+        placeholder="Search Authors..." [(ngModel)]="searchTerm">
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center"
+      *ngFor="let author of authors | Author_Filter:searchTerm | slice:(currentPage-1)*pageSize:currentPage*pageSize">
+      <div class=" card-img-top my-5">
+        <a routerLink="/author/{{author._id}}"> <img style="border-radius: 10px;" [src]="author?.image_url"
+            class="card-img-top w-75 author_img" alt="{{author.first_name}}"></a>
+        <div class="my-2">
+          <a routerLink="/author/{{author._id}}" style="text-decoration: none;">
+            <h5 class="card-title text-dark">{{author.first_name+" "+author.last_name}}</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Authors Pagination" style="display: flex;justify-content:center;align-items:center;">
+    <ul class="pagination d-flex justify-content-center w-50">
+      <li class="page-item" [class.disabled]="currentPage == 1">
+        <a class="page-link" (click)="prevPage()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li *ngFor="let page of pages" class="page-item" [class.active]="currentPage==page">
+        <a class="page-link " (click)="setPage(page)">{{page}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage == totalPages">
+        <a class="page-link" (click)="nextPage()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <app-scrolltop class="custom-scroll"></app-scrolltop>
+</div>
+
+<app-footer></app-footer>

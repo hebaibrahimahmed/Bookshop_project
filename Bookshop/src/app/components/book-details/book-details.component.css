@@ -1,0 +1,99 @@
+*{
+    color:rgb(51, 51, 51);
+}
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.author{
+    text-decoration: none;
+    color:rgb(229, 146, 132)
+}
+.author:hover{
+    text-decoration: underline;
+}
+
+
+.book-image {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    max-width: 100%;
+    max-height: 400px;
+  
+  }
+  
+  .book-image:hover {
+    
+  }
+
+
+
+  @media (max-width: 767px) {
+
+    .middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* text-align: center; */
+      }
+}
+  @media (max-width: 320px) {
+    /* *{
+        width: 100%;
+    } */
+    .col-12 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    .middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* text-align: center; */
+      }
+   
+
+      .userImg {
+        width: 50px;
+        height: 50px;
+      }
+      .user_name {
+        font-size: 12px;
+        padding: 5px;
+      }
+      .review_date {
+        font-size: 10px;
+      }
+      .edit_delete {
+        font-size: 12px;
+      }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    .my-3 {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    .book-desc p {
+      font-size: 0.8rem;
+    }
+    .author_info p {
+      font-size: 0.8rem;
+    }
+    .row .col-10 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  

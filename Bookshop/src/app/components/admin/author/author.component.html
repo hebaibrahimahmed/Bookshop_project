@@ -1,0 +1,107 @@
+<p-toast></p-toast>
+
+<div class="card my-5">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="authors" [rows]="10" [paginator]="true" [tableStyle]="{'min-width': '75rem'}"
+        [(selection)]="selectedAuthors" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Author</h5>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="first_name" style="min-width:1rem">First Name <p-sortIcon
+                        field="first_name"></p-sortIcon></th>
+                <th pSortableColumn="last_name" style="min-width:1rem">Last Name <p-sortIcon
+                        field="last_name"></p-sortIcon></th>
+                <th pSortableColumn="date_of_birth" style="min-width:1rem">Date Of Birth <p-sortIcon
+                        field="date_of_birth"></p-sortIcon></th>
+                <th>Image</th>
+                <th pSortableColumn="author_info" style="min-width:1rem">Author Info <p-sortIcon
+                        field="author_info"></p-sortIcon>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-author>
+            <tr>
+                <td>{{author.first_name}}</td>
+                <td>{{author.last_name}}</td>
+                <td>{{author.date_of_birth | date}}</td>
+                <td><img [src]="author.image_url" [alt]="author.first_name" width="50" class="shadow-4" /></td>
+                <td>{{author.author_info}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="editAuthor(author)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteAuthor(author)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{authors ? authors.length : 0 }} author.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="authorDialog" [style]="{width: '450px'}" header="Author Details" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="registerForm" (ngSubmit)="registerForm">
+
+            <img [src]="author.image_url" [alt]="author.image_url" class="product-image" *ngIf="author.image_url">
+            <div class="field">
+                <label for="first_name">First Name</label>
+                <input type="text" pInputText id="first_name" formControlName="first_name"
+                    [(ngModel)]="author.first_name" required autofocus />
+                <small class="p-error" *ngIf="submitted && !author.first_name">First Name is required.</small>
+            </div>
+            <div class="field">
+                <label for="last_name">last Name</label>
+                <input type="text" pInputText id="last_name" formControlName="last_name" [(ngModel)]="author.last_name"
+                    required autofocus />
+                <small class="p-error" *ngIf="submitted && !author.last_name">Last Name is required.</small>
+            </div>
+            <div class="field">
+                <label for="date_of_birth">Date Of Birth</label>
+                <input type="date" pInputText id="date_of_birth" formControlName="date_of_birth"
+                    [(ngModel)]="author.date_of_birth" required autofocus />
+            </div>
+            <div class="mt-2">
+                <p-toolbar>
+                    <ng-template pTemplate="right">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <img [src]="author.image_url" [alt]="author.image_url" class="product-image"
+                                *ngIf="author.image_url" style="width:100px">
+                            <input id="image_url" formControlName="image_url" type="file"
+                                (change)="onFileSelected($event)" formControlName="image_url"
+                                class="form-control bg-light text-dark" />
+                        </div>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+            <div class="field">
+                <label for="author_info">Author Info</label>
+                <textarea type="text" pInputText id="author_info" formControlName="author_info"
+                    [(ngModel)]="author.author_info" required autofocus></textarea>
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveAuthor()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

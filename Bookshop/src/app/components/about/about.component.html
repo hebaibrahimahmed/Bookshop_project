@@ -1,0 +1,160 @@
+<section class="cover-image my-2">
+  <div class="about-text">
+    <h1>About Us</h1>
+    <p class="inline-text">
+      <a routerLink="/" class="home-color">Home</a> / <span class="about-color">About Us</span>
+    </p>
+  </div>
+</section>
+
+<section class="section-two">
+  <div class="skill-div text-center mb-5">
+    <h2 class="skill-text">OUR PROCESS SKILL OF HIGH</h2>
+    <p class="skill-text-two">the right people for your project</p>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="progress-container col-md-5">
+        <h4 class="left-para">WE HAVE SKILLS TO SHOW</h4>
+        <div class="d-flex align-items-center justify-content-start">
+          <span class="progress-text">CUSTOMER FAVORITES</span>
+          <span class="progress-percent-one">73%</span>
+        </div>
+        <ng-container *ngIf="counter1$ | async as progress">
+          <div class="d-flex my-2">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+          </div>
+        </ng-container>
+        <div class="d-flex align-items-center justify-content-start">
+          <span class="progress-text">POPULAR AUTHORS</span>
+          <span class="progress-percent-two text-center">90%</span>
+        </div>
+        <ng-container *ngIf="counter2$ | async as progress">
+          <div class="d-flex my-2">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+          </div>
+        </ng-container>
+        <div class="d-flex align-items-center justify-content-start">
+          <span class="progress-text">BESTSELLING SERIES</span>
+          <span class="progress-percent-three text-center">61%</span>
+        </div>
+        <ng-container *ngIf="counter3$ | async as progress">
+          <div class="d-flex my-2">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+          </div>
+        </ng-container>
+        <div class="d-flex align-items-center justify-content-start">
+          <span class="progress-text">BARGAIN BOOKS</span>
+          <span class="progress-percent-four text-center">82%</span>
+        </div>
+        <ng-container *ngIf="counter4$ | async as progress">
+          <div class="d-flex my-2">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="col-md-5">
+        <h4 class="right-para">BUY BOOK</h4>
+        <h4 class="right-title">WELCOME TO BOIGHOR STORE !</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+          auctor sapien at tellus faucibus, a dignissim felis aliquam. Nullam
+          tincidunt lorem vitae neque facilisis suscipit. Integer at tincidunt
+          dolor. Curabitur eget neque ut justo laoreet dunt lorem vitae neque
+          Integer at tincidunt dolor. Curabitur Integer at tincidunt dolor.
+          Curabitur
+        </p>
+        <p>
+          Claritas est etiam processus dynamicus, qui sequitur mutationem
+          consuetudium lectorum.
+        </p>
+        <h5 class="address-title">London Address</h5>
+        <p>34 Parer Place via Musk Avenue Kelvin Grove, QLD, 4059</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="text-center">
+    <h2 class="skill-text">MEET OUR TEAM OF EXPERTS</h2>
+    <p class="skill-text-two">the right people for your project</p>
+  </div>
+  <div class="our-photos text-center py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-3 my-1">
+          <div class="profile">
+            <img class="w-100" src="../../../assets/Ebram.png" />
+          </div>
+          <div class="photo-caption">
+            <h4>Ebram Sobhy</h4>
+            <p>Developer</p>
+            <div class="icon-container">
+              <a href="https://www.facebook.com/profile.php?id=100001921982495" target="_blank"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="https://www.linkedin.com/in/ebram-sobhy-161690239/" target="_blank"><i
+                  class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/Abramsobhy" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 my-1">
+          <div class="profile">
+            <img class="w-100" src="../../../assets/5-1.jpg" />
+          </div>
+          <div class="photo-caption">
+            <h4>Salama Hosni</h4>
+            <p>Developer</p>
+            <div class="icon-container">
+              <a href="https://www.facebook.com/profile.php?id=100001921982495" target="_blank"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="https://www.linkedin.com/in/ebram-sobhy-161690239/" target="_blank"><i
+                  class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/Abramsobhy" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 my-1">
+          <div class="profile">
+            <img class="w-100" src="../../../assets/2-2.jpg" />
+          </div>
+          <div class="photo-caption">
+            <h4>Heba Ibrahem</h4>
+            <p>Developer</p>
+            <div class="icon-container">
+              <a href="https://www.facebook.com/profile.php?id=100001921982495" target="_blank"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="https://www.linkedin.com/in/ebram-sobhy-161690239/" target="_blank"><i
+                  class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/Abramsobhy" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-3 my-1">
+          <div class="profile">
+            <img class="w-100" src="../../../assets/5-1.jpg" />
+          </div>
+          <div class="photo-caption">
+            <h4>Mario Ehab</h4>
+            <p>Developer</p>
+            <div class="icon-container">
+              <a href="https://www.facebook.com/profile.php?id=100001921982495" target="_blank"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="https://www.linkedin.com/in/ebram-sobhy-161690239/" target="_blank"><i
+                  class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/Abramsobhy" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<app-footer></app-footer>
+
+<app-scrolltop class="custom-scroll"></app-scrolltop>
